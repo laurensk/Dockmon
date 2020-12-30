@@ -140,7 +140,7 @@ function AppStackScreen() {
       <AppStack.Screen
         name="Login"
         component={LoginStackScreen}
-        options={{headerShown: false}}
+        options={{headerShown: false, animationEnabled: false}}
       />
     </AppStack.Navigator>
   );
