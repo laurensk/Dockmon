@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {LogBox, StatusBar} from 'react-native';
 import Login from './screens/Login';
 import {OrientationUtils} from './utils/OrientationUtils';
+import Welcome from './screens/Welcome';
 
 const HomeStack = createStackNavigator();
 
@@ -58,9 +59,22 @@ function LoginStackScreen() {
   return (
     <LoginStack.Navigator>
       <LoginStack.Screen
+        name="Welcome"
+        component={Welcome}
+        options={{
+          headerStyle: {
+            backgroundColor: '#337AB7',
+            borderColor: '#BCBCC0',
+            shadowOpacity: 0.0,
+          },
+          headerTitleStyle: {color: 'white'},
+        }}
+      />
+      <LoginStack.Screen
         name="Login"
         component={Login}
         options={{
+          headerLeft: () => null,
           headerStyle: {
             backgroundColor: '#337AB7',
             borderColor: '#BCBCC0',
