@@ -1,7 +1,7 @@
 import {CommonActions} from '@react-navigation/native';
 import React from 'react';
 import {Alert, Text, View} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {NavigationScreenProp} from 'react-navigation';
 import {AuthUtils} from '../utils/AuthUtils';
 
@@ -37,7 +37,7 @@ class Settings extends React.Component<PropsType, StateType> {
 
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: '#70a9db', padding: 20}}>
+      <ScrollView style={{flex: 1, backgroundColor: '#70a9db', padding: 20}}>
         <View style={{padding: 10}}>
           <Text
             style={{
@@ -70,7 +70,7 @@ class Settings extends React.Component<PropsType, StateType> {
             Logout
           </Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     );
   }
 
