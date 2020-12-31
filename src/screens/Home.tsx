@@ -26,6 +26,8 @@ class Home extends React.Component<PropsType, StateType> {
           routes: [{name: 'Login'}],
         }) as any,
       );
+    } else {
+      // fetching data
     }
   }
 
