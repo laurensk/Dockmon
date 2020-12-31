@@ -8,6 +8,7 @@ import Settings from './screens/Settings';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {LogBox, StatusBar} from 'react-native';
 import Login from './screens/Login';
+import {OrientationUtils} from './utils/OrientationUtils';
 
 const HomeStack = createStackNavigator();
 
@@ -148,6 +149,7 @@ function AppStackScreen() {
 
 export default function App() {
   StatusBar.setBarStyle('light-content');
+  OrientationUtils.lock();
   LogBox.ignoreAllLogs();
   return (
     <NavigationContainer>
