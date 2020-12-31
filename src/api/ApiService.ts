@@ -21,6 +21,6 @@ export class ApiService {
           callback(false);
         }
       })
-      .catch((err) => callback(false));
+      .catch((_) => callback(false));
   }
 }
