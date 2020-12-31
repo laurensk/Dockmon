@@ -13,9 +13,8 @@ export class ApiService {
       Password: password,
     })
       .then(async (res) => {
-        console.log(res.data);
         if (res.data.jwt) {
-          await AuthUtils.login(endpoint + '/api', res.data.jwt);
+          await AuthUtils.login(endpoint + '/api', res.data.jwt, username);
           callback(true);
         } else {
           callback(false);
