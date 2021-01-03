@@ -75,7 +75,7 @@ class Settings extends React.Component<PropsType, StateType> {
   }
 
   logout() {
-    Alert.alert('Are your sure?', 'You have to log in again to use Dockmon.', [
+    Alert.alert('Are you sure?', 'You have to log in again to use Dockmon.', [
       {
         text: 'Cancel',
         style: 'cancel',
