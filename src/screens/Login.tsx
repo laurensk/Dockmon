@@ -1,6 +1,6 @@
 import {CommonActions} from '@react-navigation/native';
 import React from 'react';
-import {Alert, Image, Text, View} from 'react-native';
+import {Alert, Image, Platform, Text, View} from 'react-native';
 import {
   ScrollView,
   TextInput,
@@ -39,6 +39,7 @@ class Login extends React.Component<PropsType, StateType> {
             alignItems: 'center',
           }}>
           <View style={{alignItems: 'center'}}>
+            {Platform.OS == 'android' && <View style={{marginTop: 15}}></View>}
             <Image
               source={require('../assets/dockmon_cubes.png')}
               style={{width: 100, height: 88}}></Image>
