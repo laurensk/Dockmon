@@ -1,6 +1,6 @@
 import {CommonActions} from '@react-navigation/native';
 import React from 'react';
-import {Alert, Button, Image, Text, View} from 'react-native';
+import {Alert, Image, Text, View} from 'react-native';
 import {
   ScrollView,
   TextInput,
