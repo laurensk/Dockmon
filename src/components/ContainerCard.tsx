@@ -1,10 +1,14 @@
 import React from 'react';
 import {Text, View} from 'react-native';
+import {Container} from '../models/Container';
 
-interface PropsType {}
+interface PropsType {
+  container: Container;
+}
 
 class ContainerCard extends React.Component<PropsType> {
   render() {
+    const {container} = this.props;
     return (
       <View
         style={{
@@ -22,7 +26,7 @@ class ContainerCard extends React.Component<PropsType> {
           shadowRadius: 4,
           elevation: 5,
         }}>
-        <Text>summary</Text>
+        <Text>{container.Names[0]}</Text>
       </View>
     );
   }
