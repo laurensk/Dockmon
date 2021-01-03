@@ -1,6 +1,6 @@
 import {CommonActions} from '@react-navigation/native';
 import React from 'react';
-import {Alert, View} from 'react-native';
+import {ActivityIndicator, Alert, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {NavigationScreenProp} from 'react-navigation';
 import {ApiService} from '../api/ApiService';
@@ -15,12 +15,19 @@ interface PropsType {
 }
 
 interface StateType {
-  summary: Summary;
-  containers: Container[];
+  summary: Summary | null;
 }
 
 class Home extends React.Component<PropsType, StateType> {
   interval: any;
+
+  constructor(props: PropsType) {
+    super(props);
+    this.state = {
+      summary: null,
+    };
+  }
+
   componentDidMount() {
     this.checkAuth();
   }
@@ -35,18 +42,14 @@ class Home extends React.Component<PropsType, StateType> {
       );
     } else {
       this.getData();
-      //this.interval = setInterval(() => this.getData(), 10000);
+      this.interval = setInterval(() => this.getData(), 10000);
     }
   }
 
   async getData() {
-    ApiService.getData((summary: Summary, containers: Container[]) => {
-      if (summary && containers)
-        this.setState({summary: summary, containers: containers});
-      else {
-        Alert.alert('Error', 'An unknown error occurred.');
-      }
-    });
+    const summary = await ApiService.getData();
+    if (!summary) return Alert.alert('Error', 'An unknown error occurred.');
+    this.setState({summary: summary});
   }
 
   componentWillUnmount() {
@@ -57,12 +60,23 @@ class Home extends React.Component<PropsType, StateType> {
     return (
       <View style={{flex: 1, backgroundColor: '#70a9db'}}>
         <ScrollView style={{padding: 15}}>
-          <SummaryCard></SummaryCard>
+          {!this.state.summary && (
+            <View style={{marginTop: 50}}>
+              <ActivityIndicator
+                color={'white'}
+                size={'small'}></ActivityIndicator>
+            </View>
+          )}
+          {this.state.summary && <SummaryCard></SummaryCard>}
           <View style={{height: 15}}></View>
-          <ContainerCard></ContainerCard>
-          <ContainerCard></ContainerCard>
-          <ContainerCard></ContainerCard>
-          <ContainerCard></ContainerCard>
+          {this.state.summary &&
+            this.state.summary.containers.map((container) => {
+              return (
+                <ContainerCard
+                  key={container.Id}
+                  container={container}></ContainerCard>
+              );
+            })}
         </ScrollView>
       </View>
     );
