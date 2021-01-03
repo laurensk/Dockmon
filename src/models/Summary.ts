@@ -1,13 +1,11 @@
 import {Container} from './Container';
 
 export class Summary {
-  nodes: number;
-  stacks: number;
+  endpoints: number;
   containers: Container[];
 
-  constructor(nodes: number, stacks: number, containers: Container[]) {
-    this.nodes = nodes;
-    this.stacks = stacks;
+  constructor(endpoints: number, containers: Container[]) {
+    this.endpoints = endpoints;
     this.containers = containers;
   }
 }
