@@ -16,7 +16,12 @@ export class ApiService {
     })
       .then(async (res) => {
         if (res.data.jwt) {
-          await AuthUtils.login(endpoint + '/api', res.data.jwt, username);
+          await AuthUtils.login(
+            endpoint + '/api',
+            res.data.jwt,
+            username,
+            password,
+          );
           callback(true);
         } else {
           callback(false);
@@ -25,8 +30,18 @@ export class ApiService {
       .catch((_) => callback(false));
   }
 
-  public static async getData() {
-    const authData = await AuthUtils.getAuth();
+  public static async getData(init: boolean) {
+    let authData = await AuthUtils.getAuth();
+
+    if (init) {
+      const token = await Axios.post(authData.endpoint + '/auth', {
+        Username: authData.user,
+        Password: authData.password,
+      });
+      await AuthUtils.updateToken(token.data.jwt);
+      authData.token = token.data.jwt;
+    }
+
     let summary: Summary = new Summary(0, []);
 
     const res = await Axios.get(authData.endpoint + '/endpoints', {
