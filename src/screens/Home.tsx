@@ -38,17 +38,17 @@ class Home extends React.Component<PropsType, StateType> {
       this.props.navigation.dispatch(
         CommonActions.reset({
           index: 1,
-          routes: [{name: 'Login'}],
+          routes: [{name: 'Welcome'}],
         }) as any,
       );
     } else {
-      this.getData();
-      this.interval = setInterval(() => this.getData(), 10000);
+      this.getData(true);
+      this.interval = setInterval(() => this.getData(false), 10000);
     }
   }
 
-  async getData() {
-    const summary = await ApiService.getData();
+  async getData(init: boolean) {
+    const summary = await ApiService.getData(init);
     if (!summary) return Alert.alert('Error', 'An unknown error occurred.');
     this.setState({summary: summary});
   }
@@ -63,12 +63,12 @@ class Home extends React.Component<PropsType, StateType> {
         <ScrollView>
           {!this.state.summary && (
             <View style={{marginTop: 50}}>
-              <ActivityIndicator
-                color={'white'}
-                size={'small'}></ActivityIndicator>
+              <ActivityIndicator size={'small'}></ActivityIndicator>
             </View>
           )}
-          {this.state.summary && <SummaryCard></SummaryCard>}
+          {this.state.summary && (
+            <SummaryCard summary={this.state.summary}></SummaryCard>
+          )}
           {this.state.summary &&
             this.state.summary.containers.map((container) => {
               return (
