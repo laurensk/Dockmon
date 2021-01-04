@@ -10,16 +10,8 @@ class SummaryCard extends React.Component<PropsType> {
         style={{
           height: 100,
           backgroundColor: 'white',
-          borderRadius: 8,
           padding: 10,
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 3,
-            height: 2,
-          },
-          shadowOpacity: 0.2,
-          shadowRadius: 4,
-          elevation: 5,
+          paddingLeft: 17,
         }}>
         <Text>summary</Text>
       </View>

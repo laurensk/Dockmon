@@ -12,21 +12,19 @@ class ContainerCard extends React.Component<PropsType> {
     return (
       <View
         style={{
-          marginTop: 10,
           height: 80,
           backgroundColor: 'white',
-          borderRadius: 8,
-          padding: 10,
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 3,
-            height: 2,
-          },
-          shadowOpacity: 0.2,
-          shadowRadius: 4,
-          elevation: 5,
         }}>
-        <Text>{container.Names[0]}</Text>
+        <View
+          style={{
+            marginLeft: 17,
+            height: 1,
+            borderTopWidth: 0.8,
+            borderColor: '#C6C6C8',
+          }}></View>
+        <View style={{flex: 1, padding: 10, paddingLeft: 17}}>
+          <Text>{container.Names[0]}</Text>
+        </View>
       </View>
     );
   }

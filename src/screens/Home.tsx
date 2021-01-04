@@ -59,8 +59,8 @@ class Home extends React.Component<PropsType, StateType> {
 
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: '#70a9db'}}>
-        <ScrollView style={{padding: 15}}>
+      <View style={{flex: 1, backgroundColor: '#EFEFF4'}}>
+        <ScrollView>
           {!this.state.summary && (
             <View style={{marginTop: 50}}>
               <ActivityIndicator
@@ -69,7 +69,6 @@ class Home extends React.Component<PropsType, StateType> {
             </View>
           )}
           {this.state.summary && <SummaryCard></SummaryCard>}
-          <View style={{height: 15}}></View>
           {this.state.summary &&
             this.state.summary.containers.map((container) => {
               return (
