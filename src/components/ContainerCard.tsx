@@ -19,8 +19,8 @@ class ContainerCard extends React.Component<PropsType> {
           style={{
             marginLeft: 17,
             height: 1,
-            borderTopWidth: 0.8,
-            borderColor: '#C6C6C8',
+            borderTopWidth: 0.6,
+            borderColor: '#D4D4D6',
           }}></View>
         <View style={{flex: 1, padding: 10, paddingLeft: 17}}>
           <Text>
