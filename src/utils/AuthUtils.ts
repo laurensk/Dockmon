@@ -60,7 +60,7 @@ export class AuthUtils {
           navigation.dispatch(
             CommonActions.reset({
               index: 1,
-              routes: [{name: 'Login'}],
+              routes: [{name: 'Welcome'}],
             }) as any,
           );
         },
