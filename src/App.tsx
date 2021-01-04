@@ -5,7 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from './screens/Home';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Button, LogBox, StatusBar} from 'react-native';
+import {Button, LogBox, StatusBar, useColorScheme} from 'react-native';
 import Login from './screens/Login';
 import {OrientationUtils} from './utils/OrientationUtils';
 import Welcome from './screens/Welcome';
@@ -35,7 +35,7 @@ function StackScreen() {
           title: 'Dockmon',
           headerLeft: () => null,
           headerStyle: {
-            backgroundColor: '#337AB7',
+            backgroundColor: useColorScheme() == 'dark' ? '#1a5a91' : '#337AB7',
             borderColor: '#BCBCC0',
             shadowOpacity: 0.0,
           },
@@ -48,7 +48,7 @@ function StackScreen() {
         options={{
           animationEnabled: false,
           headerStyle: {
-            backgroundColor: '#337AB7',
+            backgroundColor: useColorScheme() == 'dark' ? '#1a5a91' : '#337AB7',
             borderColor: '#BCBCC0',
             shadowOpacity: 0.0,
           },
@@ -61,7 +61,7 @@ function StackScreen() {
         options={{
           headerLeft: () => null,
           headerStyle: {
-            backgroundColor: '#337AB7',
+            backgroundColor: useColorScheme() == 'dark' ? '#1a5a91' : '#337AB7',
             borderColor: '#BCBCC0',
             shadowOpacity: 0.0,
           },

@@ -30,24 +30,16 @@ export class ApiService {
       .catch((_) => callback(false));
   }
 
-  public static async getData(init: boolean) {
+  public static async getData() {
     let authData = await AuthUtils.getAuth();
-
-    if (init) {
-      const token = await Axios.post(authData.endpoint + '/auth', {
-        Username: authData.user,
-        Password: authData.password,
-      });
-      await AuthUtils.updateToken(token.data.jwt);
-      authData.token = token.data.jwt;
-    }
 
     let summary: Summary = new Summary(0, []);
 
     const res = await Axios.get(authData.endpoint + '/endpoints', {
       headers: {Authorization: `Bearer ${authData.token}`},
     });
-    if (!res) return false;
+
+    if (res.status != 200) return this.getToken(authData);
 
     let endpoints: number[] = [];
     res.data.forEach((endpoint: any) => {
@@ -66,18 +58,24 @@ export class ApiService {
     return summary;
   }
 
+  private static async getToken(authData: any) {
+    const token = await Axios.post(authData.endpoint + '/auth', {
+      Username: authData.user,
+      Password: authData.password,
+    });
+    await AuthUtils.updateToken(token.data.jwt);
+    this.getData();
+  }
+
   private static async getContainersForEndpoint(
     endpoint: number,
-    authData: {
-      token: string | null;
-      endpoint: string | null;
-      user: string | null;
-    },
+    authData: any,
   ) {
     const res = await Axios.get(
       authData.endpoint + '/endpoints/' + endpoint + '/docker/containers/json',
       {
         headers: {Authorization: `Bearer ${authData.token}`},
+        params: {all: 'true'},
       },
     );
     if (!res) return [];
