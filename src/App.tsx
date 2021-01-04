@@ -32,6 +32,7 @@ function StackScreen() {
         name="Home"
         component={Home}
         options={{
+          title: 'Dockmon',
           headerLeft: () => null,
           headerStyle: {
             backgroundColor: '#337AB7',
@@ -45,6 +46,7 @@ function StackScreen() {
         name="Welcome"
         component={Welcome}
         options={{
+          animationEnabled: false,
           headerStyle: {
             backgroundColor: '#337AB7',
             borderColor: '#BCBCC0',
@@ -57,7 +59,6 @@ function StackScreen() {
         name="Login"
         component={Login}
         options={{
-          animationEnabled: false,
           headerLeft: () => null,
           headerStyle: {
             backgroundColor: '#337AB7',
