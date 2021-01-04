@@ -4,6 +4,7 @@ import {ActivityIndicator, Alert, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {NavigationScreenProp} from 'react-navigation';
 import {ApiService} from '../api/ApiService';
+import AppContext from '../components/AppContext';
 import ContainerCard from '../components/ContainerCard';
 import SummaryCard from '../components/SummaryCard';
 import {Container} from '../models/Container';
@@ -83,4 +84,4 @@ class Home extends React.Component<PropsType, StateType> {
   }
 }
 
-export default Home;
+export default AppContext(Home);

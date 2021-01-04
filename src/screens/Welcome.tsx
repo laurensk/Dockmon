@@ -3,6 +3,7 @@ import {Button, Image, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {NavigationScreenProp} from 'react-navigation';
+import AppContext from '../components/AppContext';
 
 interface PropsType {
   navigation: NavigationScreenProp<any, any>;
@@ -76,4 +77,4 @@ class Welcome extends React.Component<PropsType, any> {
   }
 }
 
-export default Welcome;
+export default AppContext(Welcome);

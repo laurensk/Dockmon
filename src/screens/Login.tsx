@@ -9,6 +9,7 @@ import {
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {NavigationScreenProp} from 'react-navigation';
 import {ApiService} from '../api/ApiService';
+import AppContext from '../components/AppContext';
 
 interface PropsType {
   navigation: NavigationScreenProp<any, any>;
@@ -145,7 +146,7 @@ class Login extends React.Component<PropsType, StateType> {
         this.props.navigation.dispatch(
           CommonActions.reset({
             index: 1,
-            routes: [{name: 'Tabs'}],
+            routes: [{name: 'Home'}],
           }) as any,
         );
       } else {
@@ -158,4 +159,4 @@ class Login extends React.Component<PropsType, StateType> {
   }
 }
 
-export default Login;
+export default AppContext(Login);

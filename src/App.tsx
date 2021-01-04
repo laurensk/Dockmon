@@ -4,22 +4,35 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from './screens/Home';
-import Settings from './screens/Settings';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {LogBox, StatusBar} from 'react-native';
+import {Button, LogBox, StatusBar} from 'react-native';
 import Login from './screens/Login';
 import {OrientationUtils} from './utils/OrientationUtils';
 import Welcome from './screens/Welcome';
+import {AuthUtils} from './utils/AuthUtils';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const HomeStack = createStackNavigator();
+const Stack = createStackNavigator();
 
-function HomeStackScreen() {
+function StackScreen() {
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen
-        name="Dockmon"
+    <Stack.Navigator
+      screenOptions={({route, navigation}) => ({
+        headerRight: () => {
+          return route.name == 'Home' ? (
+            <TouchableOpacity
+              style={{marginRight: 20, marginBottom: 1}}
+              onPress={() => AuthUtils.logoutAlert(navigation)}>
+              <Icon name="log-out-outline" size={25} color="#ffffff"></Icon>
+            </TouchableOpacity>
+          ) : null;
+        },
+      })}>
+      <Stack.Screen
+        name="Home"
         component={Home}
         options={{
+          headerLeft: () => null,
           headerStyle: {
             backgroundColor: '#337AB7',
             borderColor: '#BCBCC0',
@@ -28,37 +41,7 @@ function HomeStackScreen() {
           headerTitleStyle: {color: 'white'},
         }}
       />
-    </HomeStack.Navigator>
-  );
-}
-
-const SettingsStack = createStackNavigator();
-
-function SettingsStackScreen() {
-  return (
-    <SettingsStack.Navigator>
-      <SettingsStack.Screen
-        name="Settings"
-        component={Settings}
-        options={{
-          headerStyle: {
-            backgroundColor: '#337AB7',
-            borderColor: '#BCBCC0',
-            shadowOpacity: 0.0,
-          },
-          headerTitleStyle: {color: 'white'},
-        }}
-      />
-    </SettingsStack.Navigator>
-  );
-}
-
-const LoginStack = createStackNavigator();
-
-function LoginStackScreen() {
-  return (
-    <LoginStack.Navigator>
-      <LoginStack.Screen
+      <Stack.Screen
         name="Welcome"
         component={Welcome}
         options={{
@@ -70,10 +53,11 @@ function LoginStackScreen() {
           headerTitleStyle: {color: 'white'},
         }}
       />
-      <LoginStack.Screen
+      <Stack.Screen
         name="Login"
         component={Login}
         options={{
+          animationEnabled: false,
           headerLeft: () => null,
           headerStyle: {
             backgroundColor: '#337AB7',
@@ -83,81 +67,7 @@ function LoginStackScreen() {
           headerTitleStyle: {color: 'white'},
         }}
       />
-    </LoginStack.Navigator>
-  );
-}
-
-const Tab = createBottomTabNavigator();
-
-function TabScreen() {
-  return (
-    <Tab.Navigator
-      tabBarOptions={{
-        style: {
-          backgroundColor: '#337AB7',
-          shadowOpacity: 0.0,
-          borderTopWidth: 0.0,
-          borderColor: '#BCBCC0',
-        },
-        activeTintColor: 'white',
-        inactiveTintColor: '#d6d6d6',
-      }}>
-      <Tab.Screen
-        name="Dockmon"
-        component={HomeStackScreen}
-        options={{
-          tabBarIcon: ({focused, color, size}) => (
-            <Icon
-              name="cube-outline"
-              size={size}
-              color={focused ? 'white' : '#d6d6d6'}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Settings"
-        component={SettingsStackScreen}
-        options={{
-          tabBarIcon: ({focused, color, size}) => (
-            <Icon
-              name="cog-outline"
-              size={size}
-              color={focused ? 'white' : '#d6d6d6'}
-            />
-          ),
-        }}
-      />
-    </Tab.Navigator>
-  );
-}
-
-const AppStack = createStackNavigator();
-
-function AppStackScreen() {
-  return (
-    <AppStack.Navigator>
-      <AppStack.Screen
-        name="Tabs"
-        component={TabScreen}
-        options={{headerShown: false}}
-      />
-      <AppStack.Screen
-        name="Dockmon"
-        component={HomeStackScreen}
-        options={{headerShown: false}}
-      />
-      <AppStack.Screen
-        name="Settings"
-        component={SettingsStackScreen}
-        options={{headerShown: false}}
-      />
-      <AppStack.Screen
-        name="Login"
-        component={LoginStackScreen}
-        options={{headerShown: false, animationEnabled: false}}
-      />
-    </AppStack.Navigator>
+    </Stack.Navigator>
   );
 }
 
@@ -167,7 +77,7 @@ export default function App() {
   LogBox.ignoreAllLogs();
   return (
     <NavigationContainer>
-      <AppStackScreen></AppStackScreen>
+      <StackScreen></StackScreen>
     </NavigationContainer>
   );
 }
