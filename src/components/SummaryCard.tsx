@@ -1,10 +1,14 @@
 import React from 'react';
 import {Text, View} from 'react-native';
+import {Summary} from '../models/Summary';
 
-interface PropsType {}
+interface PropsType {
+  summary: Summary;
+}
 
 class SummaryCard extends React.Component<PropsType> {
   render() {
+    const {summary} = this.props;
     return (
       <View
         style={{
@@ -13,7 +17,8 @@ class SummaryCard extends React.Component<PropsType> {
           padding: 10,
           paddingLeft: 17,
         }}>
-        <Text>summary</Text>
+        <Text>{summary.endpoints} endpoints</Text>
+        <Text>{summary.containers.length} containers</Text>
       </View>
     );
   }

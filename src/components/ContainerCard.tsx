@@ -23,6 +23,9 @@ class ContainerCard extends React.Component<PropsType> {
             borderColor: '#C6C6C8',
           }}></View>
         <View style={{flex: 1, padding: 10, paddingLeft: 17}}>
+          <Text>
+            {container.State} - {container.Status}
+          </Text>
           <Text>{container.Names[0]}</Text>
         </View>
       </View>
