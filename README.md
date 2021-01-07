@@ -1,4 +1,4 @@
-# Dockmon-App
+# Dockmon
 
 With Dockmon, you can monitor all your Docker containers with ease, get an overview, and always make sure your containers are running.
 
