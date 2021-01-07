@@ -1,7 +1,7 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import * as React from 'react';
-import {LogBox, StatusBar, useColorScheme} from 'react-native';
+import {LogBox, Platform, StatusBar, useColorScheme} from 'react-native';
 import 'react-native-gesture-handler';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -75,6 +75,7 @@ export default function App() {
   StatusBar.setBarStyle('light-content');
   OrientationUtils.lock();
   LogBox.ignoreAllLogs();
+  if (Platform.OS == 'android') StatusBar.setBackgroundColor('#337AB7');
   return (
     <NavigationContainer>
       <StackScreen></StackScreen>
