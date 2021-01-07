@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {CommonActions} from '@react-navigation/native';
 import {Alert} from 'react-native';
-import {NavigationSwitchProp} from 'react-navigation';
 
 export class AuthUtils {
   private static DOCKMON_ENDPOINT: string = 'DOCKMON_ENDPOINT';

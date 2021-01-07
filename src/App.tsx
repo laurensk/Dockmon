@@ -1,16 +1,15 @@
-import 'react-native-gesture-handler';
-import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Home from './screens/Home';
+import * as React from 'react';
+import {LogBox, StatusBar, useColorScheme} from 'react-native';
+import 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Button, LogBox, StatusBar, useColorScheme} from 'react-native';
+import Home from './screens/Home';
 import Login from './screens/Login';
-import {OrientationUtils} from './utils/OrientationUtils';
 import Welcome from './screens/Welcome';
 import {AuthUtils} from './utils/AuthUtils';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {OrientationUtils} from './utils/OrientationUtils';
 
 const Stack = createStackNavigator();
 

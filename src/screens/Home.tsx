@@ -8,7 +8,6 @@ import AppContext from '../components/AppContext';
 import ContainerCard from '../components/ContainerCard';
 import Separator from '../components/Separator';
 import SummaryCard from '../components/SummaryCard';
-import {Container} from '../models/Container';
 import {Summary} from '../models/Summary';
 import {AuthUtils} from '../utils/AuthUtils';
 
