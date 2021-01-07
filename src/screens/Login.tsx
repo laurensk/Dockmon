@@ -1,6 +1,13 @@
 import {CommonActions} from '@react-navigation/native';
 import React from 'react';
-import {Alert, Image, Platform, Text, View} from 'react-native';
+import {
+  Alert,
+  ColorSchemeName,
+  Image,
+  Platform,
+  Text,
+  View,
+} from 'react-native';
 import {
   ScrollView,
   TextInput,
@@ -13,6 +20,7 @@ import AppContext from '../components/AppContext';
 
 interface PropsType {
   navigation: NavigationScreenProp<any, any>;
+  colorScheme: ColorSchemeName;
 }
 
 interface StateType {
@@ -45,6 +53,9 @@ class Login extends React.Component<PropsType, StateType> {
               source={require('../assets/dockmon_cubes.png')}
               style={{width: 100, height: 88}}></Image>
             <TextInput
+              placeholderTextColor={
+                this.props.colorScheme == 'dark' ? '#A1ABB6' : undefined
+              }
               onChangeText={(t) => this.setState({endpoint: t})}
               autoCompleteType={'off'}
               autoCapitalize={'none'}
@@ -60,6 +71,9 @@ class Login extends React.Component<PropsType, StateType> {
                 marginTop: 40,
               }}></TextInput>
             <TextInput
+              placeholderTextColor={
+                this.props.colorScheme == 'dark' ? '#A1ABB6' : undefined
+              }
               onChangeText={(t) => this.setState({username: t})}
               placeholder="Username"
               autoCompleteType={'off'}
@@ -74,6 +88,9 @@ class Login extends React.Component<PropsType, StateType> {
                 marginTop: 10,
               }}></TextInput>
             <TextInput
+              placeholderTextColor={
+                this.props.colorScheme == 'dark' ? '#A1ABB6' : undefined
+              }
               onChangeText={(t) => this.setState({password: t})}
               placeholder="Password"
               autoCorrect={false}
