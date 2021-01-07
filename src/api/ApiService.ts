@@ -30,32 +30,35 @@ export class ApiService {
       .catch((_) => callback(false));
   }
 
-  public static async getData() {
+  public static async getData(): Promise<Summary> {
     let authData = await AuthUtils.getAuth();
 
     let summary: Summary = new Summary(0, []);
 
-    const res = await Axios.get(authData.endpoint + '/endpoints', {
-      headers: {Authorization: `Bearer ${authData.token}`},
-    });
+    try {
+      const res = await Axios.get(authData.endpoint + '/endpoints', {
+        headers: {Authorization: `Bearer ${authData.token}`},
+      });
 
-    if (res.status != 200) return this.getToken(authData);
+      let endpoints: number[] = [];
+      res.data.forEach((endpoint: any) => {
+        endpoints.push(endpoint.Id);
+      });
+      summary.endpoints = endpoints.length;
 
-    let endpoints: number[] = [];
-    res.data.forEach((endpoint: any) => {
-      endpoints.push(endpoint.Id);
-    });
-    summary.endpoints = endpoints.length;
+      for (const endpoint of endpoints) {
+        const containers = await this.getContainersForEndpoint(
+          endpoint,
+          authData,
+        );
+        summary.containers.push.apply(summary.containers, containers);
+      }
 
-    for (const endpoint of endpoints) {
-      const containers = await this.getContainersForEndpoint(
-        endpoint,
-        authData,
-      );
-      summary.containers.push.apply(summary.containers, containers);
+      return summary;
+    } catch {
+      await this.getToken(authData);
+      return this.getData();
     }
-
-    return summary;
   }
 
   private static async getToken(authData: any) {
@@ -64,7 +67,6 @@ export class ApiService {
       Password: authData.password,
     });
     await AuthUtils.updateToken(token.data.jwt);
-    this.getData();
   }
 
   private static async getContainersForEndpoint(
