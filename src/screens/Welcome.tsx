@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Image, Text, View} from 'react-native';
+import {Button, ColorSchemeName, Image, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {NavigationScreenProp} from 'react-navigation';
@@ -42,8 +42,7 @@ class Welcome extends React.Component<PropsType, any> {
               textAlign: 'center',
             }}>
             With Dockmon, you can monitor all your Docker containers with ease,
-            get push-notifications and always make sure your containers are
-            running.
+            get an overview and always make sure your containers are running.
           </Text>
         </View>
         <View style={{width: '100%', paddingHorizontal: 30}}>
