@@ -177,8 +177,6 @@ class Login extends React.Component<PropsType, StateType> {
       add = 'http://';
     }
 
-    console.log('logging in with: ' + add + this.state.endpoint);
-
     ApiService.loginWith(
       add + this.state.endpoint,
       username,
