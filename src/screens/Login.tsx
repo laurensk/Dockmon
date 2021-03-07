@@ -57,6 +57,7 @@ class Login extends React.Component<PropsType, StateType> {
                 this.props.colorScheme == 'dark' ? '#A1ABB6' : undefined
               }
               onChangeText={(t) => this.setState({endpoint: t})}
+              value={this.state.endpoint}
               autoCompleteType={'off'}
               autoCapitalize={'none'}
               autoCorrect={false}
@@ -151,28 +152,53 @@ class Login extends React.Component<PropsType, StateType> {
   }
 
   login() {
-    const {endpoint, username, password} = this.state;
-    if (endpoint.length <= 0 || username.length <= 0 || password.length <= 0)
+    const {username, password} = this.state;
+    if (
+      this.state.endpoint.length <= 0 ||
+      username.length <= 0 ||
+      password.length <= 0
+    )
       return Alert.alert(
         'Credentials required',
         'Please enter your Portainer credentials to log in.',
       );
 
-    ApiService.loginWith(endpoint, username, password, (result: boolean) => {
-      if (result) {
-        this.props.navigation.dispatch(
-          CommonActions.reset({
-            index: 1,
-            routes: [{name: 'Home'}],
-          }) as any,
-        );
-      } else {
-        Alert.alert(
-          'Login failed',
-          'Make sure URL, username and password are correct.',
-        );
-      }
-    });
+    // #1 - Add 'http://' in front of url if it doesn't start with 'http://' or 'https://'
+
+    let add = '';
+
+    if (
+      !(
+        this.state.endpoint.substr(0, 7) == 'http://' ||
+        this.state.endpoint.substr(0, 8) == 'https://'
+      )
+    ) {
+      this.setState({endpoint: 'http://' + this.state.endpoint});
+      add = 'http://';
+    }
+
+    console.log('logging in with: ' + add + this.state.endpoint);
+
+    ApiService.loginWith(
+      add + this.state.endpoint,
+      username,
+      password,
+      (result: boolean) => {
+        if (result) {
+          this.props.navigation.dispatch(
+            CommonActions.reset({
+              index: 1,
+              routes: [{name: 'Home'}],
+            }) as any,
+          );
+        } else {
+          Alert.alert(
+            'Login failed',
+            'Make sure URL, username and password are correct.',
+          );
+        }
+      },
+    );
   }
 }
 
